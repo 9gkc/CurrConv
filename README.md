@@ -1,5 +1,12 @@
 # 💱 Global Currency Converter
 
+<div align="center">
+  <img src="https://img.shields.io/github/last-commit/9gkc/CurrConv?style=for-the-badge&label=Last%20Update&color=58A6FF" alt="Last Update">
+  <img src="https://img.shields.io/github/stars/9gkc/CurrConv?style=for-the-badge&color=58A6FF" alt="GitHub Stars">
+  <img src="https://img.shields.io/github/forks/9gkc/CurrConv?style=for-the-badge&color=58A6FF" alt="GitHub Forks">
+</div>
+
+
 ![API](https://img.shields.io/badge/API-ExchangeRate-red?style=for-the-badge)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![JSON](https://img.shields.io/badge/Data-JSON-lightgrey?style=for-the-badge)
