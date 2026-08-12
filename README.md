@@ -16,11 +16,15 @@ A high-performance currency conversion tool that connects to live financial data
 ## 🚀 Key Features
 - **Live Data Fetching**: Integrates with ExchangeRate-API for real-time global rates.
 - **Major Currencies**: Pre-configured for USD, EUR, EGP, KWD, and GBP.
-- **Error Handling**: Robust logic to handle network issues or API failures gracefully.
-- **Precision**: Calculations are rounded to two decimal places for financial accuracy.
+- **Error Handling**: Robust logic to handle invalid input, network issues, timeouts, or API failures gracefully.
+- **Precision**: Calculations are rounded to two decimal places for display.
+- **Accessible UX**: Labeled fields, keyboard-friendly submission, and live result announcements.
+- **No Browser Secret**: The client contains no API key. Configure a server-side proxy or a public no-key endpoint instead.
 
 ## 🛠️ Installation & Usage
-1. Clone the repository: `git clone https://github.com/9gkc/currency-converter-app.git`
-2. Open `index.html` (Requires internet connection for live rates).
+1. Clone the repository: `git clone https://github.com/9gkc/CurrConv.git`
+2. Serve the static files over HTTP and open `index.html` (a local file URL may block fetch requests).
+3. The default endpoint is `https://open.er-api.com/v6/latest/{FROM}`. To use a server-side proxy, define `window.CURRCONV_API_BASE_URL` before `main.js` and keep any provider key on the server, never in this repository or browser code.
+4. The converter currently accepts USD, EUR, EGP, KWD, and GBP and validates the amount before requesting a rate.
 
 ---

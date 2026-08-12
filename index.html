@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project</title>
+    <title>Currency Converter</title>
     <link rel="stylesheet" href="main.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,26 +12,33 @@
       rel="stylesheet" />
   </head>
   <body>
-    <h1>Currency Converter Application</h1>
-    <div class="currency-converter">
-      <input type="number" class="amount" placeholder="Amount" />
-      <select class="from">
-        <option value="USD">USD</option>
-        <option value="EUR">EUR</option>
-        <option value="EGP">EGP</option>
-        <option value="KWD">KWD</option>
-        <option value="GBP">GBP</option>
-      </select>
-      <select class="to">
-        <option value="USD">USD</option>
-        <option value="EUR">EUR</option>
-        <option value="EGP">EGP</option>
-        <option value="KWD">KWD</option>
-        <option value="GBP">GBP</option>
-      </select>
-      <button id="convert" onclick="convertCurrency()">Convert</button>
-      <div class="result"></div>
-    </div>
+    <main>
+      <h1>Currency Converter</h1>
+      <form id="currency-form" class="currency-converter">
+        <label for="amount">Amount</label>
+        <input id="amount" type="number" class="amount" placeholder="100" min="0.01" max="1000000000000" step="0.01" inputmode="decimal" required />
+        <div class="currency-fields">
+          <label for="from">From</label>
+          <select id="from" class="from" required>
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="EGP">EGP</option>
+            <option value="KWD">KWD</option>
+            <option value="GBP">GBP</option>
+          </select>
+          <label for="to">To</label>
+          <select id="to" class="to" required>
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="EGP">EGP</option>
+            <option value="KWD">KWD</option>
+            <option value="GBP">GBP</option>
+          </select>
+        </div>
+        <button id="convert" type="submit">Convert</button>
+        <p class="result" role="status" aria-live="polite">Enter an amount to begin.</p>
+      </form>
+    </main>
     <script src="main.js"></script>
   </body>
 </html>
