@@ -2,6 +2,12 @@
 
 > **Live demo:** [Open CurrConv in your browser](https://9gkc.github.io/CurrConv/)
 
+## Interface preview
+
+![CurrConv live interface with amount entry, source and destination currency selectors, and conversion action](docs/images/currconv-live-preview.webp)
+
+**[Open the live converter](https://9gkc.github.io/CurrConv/)**. Rates displayed by this educational utility are informational only: they are not financial advice, a trading signal, a guaranteed market quote, or a substitute for a regulated financial service.
+
 <div align="center">
   <img src="https://img.shields.io/github/last-commit/9gkc/CurrConv?style=for-the-badge&label=Last%20Update&color=58A6FF" alt="Last Update">
   <img src="https://img.shields.io/github/stars/9gkc/CurrConv?style=for-the-badge&color=58A6FF" alt="GitHub Stars">
