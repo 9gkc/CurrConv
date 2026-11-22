@@ -52,10 +52,16 @@ async function convertCurrency(event) {
     const base = new URL(apiBaseUrl);
     base.pathname = `${base.pathname.replace(/\/+$/, "")}/${encodeURIComponent(from)}`;
     base.search = "";
+
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), 8_000);
+
     const response = await fetch(base, {
       headers: { Accept: "application/json" },
-      signal: AbortSignal.timeout(8_000),
+      signal: controller.signal,
     });
+    window.clearTimeout(timeoutId);
+
     if (!response.ok) throw new Error(`Exchange service returned ${response.status}.`);
     const data = await response.json();
     if (data?.result === "error") throw new Error(data["error-type"] || "Exchange service rejected the request.");
@@ -64,9 +70,10 @@ async function convertCurrency(event) {
     if (rate === null) throw new Error("The exchange service returned no rate for this currency.");
     setResult(`${formatAmount(amount)} ${from} = ${formatAmount(amount * rate)} ${to}`, "success");
   } catch (error) {
-    const message = error instanceof Error && error.name === "TimeoutError"
-      ? "The exchange service timed out. Please try again."
-      : "The exchange rate is unavailable right now. Please try again later.";
+    const message =
+      error instanceof Error && error.name === "AbortError"
+        ? "The exchange service timed out. Please try again."
+        : "The exchange rate is unavailable right now. Please try again later.";
     setResult(message, "error");
     console.error("Unable to convert currency", error);
   } finally {
