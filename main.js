@@ -18,9 +18,29 @@ function formatAmount(value) {
   return new Intl.NumberFormat(undefined, { maximumFractionDigits: 2 }).format(value);
 }
 
+function formatRate(value) {
+  return new Intl.NumberFormat(undefined, { maximumFractionDigits: 6 }).format(value);
+}
+
 function readRate(data, currency) {
   const rate = data?.rates?.[currency] ?? data?.conversion_rates?.[currency];
   return typeof rate === "number" && Number.isFinite(rate) && rate > 0 ? rate : null;
+}
+
+function ensureSwapControl() {
+  if (!fromSelect || !toSelect || document.querySelector("#swap-currencies")) return;
+  const swapButton = document.createElement("button");
+  swapButton.type = "button";
+  swapButton.id = "swap-currencies";
+  swapButton.textContent = "Swap currencies";
+  swapButton.setAttribute("aria-label", "Swap from and to currencies");
+  swapButton.addEventListener("click", () => {
+    const previousFrom = fromSelect.value;
+    fromSelect.value = toSelect.value;
+    toSelect.value = previousFrom;
+    setResult("Currencies swapped. Convert again when ready.", "info");
+  });
+  toSelect.insertAdjacentElement("afterend", swapButton);
 }
 
 async function convertCurrency(event) {
@@ -42,7 +62,7 @@ async function convertCurrency(event) {
   }
 
   if (from === to) {
-    setResult(`${formatAmount(amount)} ${from} = ${formatAmount(amount)} ${to}`, "success");
+    setResult(`${formatAmount(amount)} ${from} = ${formatAmount(amount)} ${to} (rate 1)`, "success");
     return;
   }
 
@@ -68,7 +88,10 @@ async function convertCurrency(event) {
 
     const rate = readRate(data, to);
     if (rate === null) throw new Error("The exchange service returned no rate for this currency.");
-    setResult(`${formatAmount(amount)} ${from} = ${formatAmount(amount * rate)} ${to}`, "success");
+    setResult(
+      `${formatAmount(amount)} ${from} = ${formatAmount(amount * rate)} ${to} · rate ${formatRate(rate)}`,
+      "success",
+    );
   } catch (error) {
     const message =
       error instanceof Error && error.name === "AbortError"
@@ -81,4 +104,5 @@ async function convertCurrency(event) {
   }
 }
 
+ensureSwapControl();
 form?.addEventListener("submit", convertCurrency);
